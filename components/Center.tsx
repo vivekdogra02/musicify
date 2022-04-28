@@ -23,7 +23,7 @@ function Center() {
   const spotifyApi = useSpotify()
   const [color, setColor] = useState(null)
   const playlistId = useRecoilValue(playlistIdState)
-  const [playlist, setPlaylist] = useRecoilState(playlistState)
+  const [playlist, setPlaylist] = useRecoilState(playlistState) as any;
 
   useEffect(() => {
     if(colors) {
@@ -45,7 +45,7 @@ function Center() {
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8 ">
         <div className="flex cursor-pointer items-center space-x-3 
-        rounded-full bg-black p-1 pr-2 text-white opacity-90 hover:opacity-80" onClick={() => signOut}>
+        rounded-full bg-black p-1 pr-2 text-white opacity-90 hover:opacity-80" onClick={() => signOut()}>
           <img
             className="h-10 w-10 rounded-full"
             src={session?.user?.image!}
@@ -66,7 +66,7 @@ function Center() {
         <div>
           <p>PLAYLIST</p>
           <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">
-            {playlist?.["name"]} <span className='text-xl'>({playlist?.["tracks"]["items"]?.[length]})</span> 
+            {playlist?.["name"]}
           </h1>
         </div>
       </section>
