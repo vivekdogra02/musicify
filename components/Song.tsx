@@ -13,7 +13,7 @@ function Song({ order, track }: any) {
     setCurrentTrackId(track.track.id)
     setIsPlaying(true)
     spotifyApi.play({
-        context_uri : [track.track.uri],
+        context_uri : track.track.uri,
     })
   }
   return (

@@ -1,7 +1,8 @@
 import { ChevronDoubleDownIcon } from '@heroicons/react/outline'
 import { signOut, useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { shuffle } from 'lodash'
+
+import _ from 'lodash';
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { playlistState, playlistIdState } from '../atoms/playlistAtom'
 import useSpotify from '../hooks/useSpotify'
@@ -25,7 +26,10 @@ function Center() {
   const [playlist, setPlaylist] = useRecoilState(playlistState)
 
   useEffect(() => {
-    setColor(shuffle(colors).pop())
+    if(colors) {
+      const v: any = _.shuffle(colors).pop();
+      setColor(v)
+    }
   }, [playlistId])
 
   useEffect(() => {
@@ -41,7 +45,7 @@ function Center() {
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8 ">
         <div className="flex cursor-pointer items-center space-x-3 
-        rounded-full bg-black p-1 pr-2 text-white opacity-90 hover:opacity-80" onClick={signOut}>
+        rounded-full bg-black p-1 pr-2 text-white opacity-90 hover:opacity-80" onClick={() => signOut}>
           <img
             className="h-10 w-10 rounded-full"
             src={session?.user?.image!}
@@ -56,13 +60,13 @@ function Center() {
       >
         <img
           className="h-44 w-44 shadow-2xl"
-          src={playlist?.images?.[0]?.url}
+          src={playlist?.["images"]?.[0]?.["url"]!}
           alt=""
         />
         <div>
           <p>PLAYLIST</p>
           <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">
-            {playlist?.name} <span className='text-xl'>({playlist?.tracks?.items.length})</span> 
+            {playlist?.["name"]} <span className='text-xl'>({playlist?.["tracks"]["items"]?.[length]})</span> 
           </h1>
         </div>
       </section>

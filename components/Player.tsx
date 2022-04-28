@@ -22,7 +22,7 @@ function Player() {
     useRecoilState(currentTrackIdState)
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
   const [volume, setVolume] = useState(50)
-  const songInfo = useSongInfo()
+  const songInfo: any = useSongInfo()
 
   const fetchCurrentSong = () => {
     if (!songInfo) {
@@ -67,7 +67,7 @@ function Player() {
 
   const debounceAdjustVolume = useCallback(
     debounce((volume) => {
-      spotifyApi.setVolume(volume).catch((err) => {})
+      spotifyApi.setVolume(volume).catch((err: any) => {})
     }, 500), []
   )
   return (
